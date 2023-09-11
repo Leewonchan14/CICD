@@ -6,6 +6,7 @@ EXPOSE 8080
 
 
 
+
 COPY build/libs .
 
 # run ./gradlew bootRun
