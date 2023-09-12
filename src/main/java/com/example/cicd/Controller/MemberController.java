@@ -11,6 +11,6 @@ public class MemberController {
     @GetMapping
     public String getMembers() {
 
-        return "Hello World 1";
+        return "Hello World 2";
     }
 }
