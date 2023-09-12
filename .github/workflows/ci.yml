@@ -55,44 +55,20 @@ jobs:
           docker push ${{ secrets.DOCKER_USERNAME }}/ci:${{ github.sha }}
 
 
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: sample
-#          path: build/libs
-#
-#      - name: Remove text.txt
-#        run: rm test.txt
-
-#      - name: Create Directory test
-#        run: mkdir test
-
-#      - name: ls a 3
-#        run: ls -a
-#
-#      - name: Download artifact
-#        uses: actions/download-artifact@v3
-#        with:
-#          name: test
-#          path: ./test/test.txt
-
-#      - name: ls a 4
-#        run: ls -a
-#
-#  deploy:
-#    needs: build
-#    runs-on: ubuntu-latest
-#    steps:
-#    - name: Download artifact
-#      uses: actions/download-artifact@v3
-#      with:
-#        name: cicdsample
-#        path: build/libs
-#
-#      - name: Deploy
-#        uses: appleboy/ssh-action@master
-#        with:
-#          host: ${{ secrets.SERVER_IP }}
-#          username: ubuntu
-#          key: ${{ secrets.SSH_PRIVATE_KEY }}
-#          script: |
-            
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/ci:${{ github.sha }}
+            sudo docker stop ci || true
+            sudo docker rm ci || true
+            sudo docker rmi ${{ secrets.DOCKER_USERNAME }}/ci:latest || true
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/ci:${{ github.sha }}
+            sudo docker run -d --name ci -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/ci:${{ github.sha }}
