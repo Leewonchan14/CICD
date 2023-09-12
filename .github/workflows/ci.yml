@@ -66,6 +66,9 @@ jobs:
       - name: Remove text.txt
         run: rm test.txt
 
+#      - name: Create Directory test
+#        run: mkdir test
+
       - name: ls a 3
         run: ls -a
 
@@ -73,7 +76,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: test
-          path: test.txt
+          path: ./test/test.txt
 
       - name: ls a 4
         run: ls -a
