@@ -66,8 +66,7 @@ jobs:
           username: ubuntu
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/ci:${{ github.sha }}
             sudo docker stop ci || true
             sudo docker rm ci || true
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/ci:${{ github.sha }}
-            sudo docker run -d --name ci -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/ci:${{ github.sha }}
+            sudo docker run -d -p 8080:8080 --name ci ${{ secrets.DOCKER_USERNAME }}/ci:${{ github.sha }}
