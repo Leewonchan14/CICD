@@ -27,19 +27,19 @@ jobs:
       - name: ls a
         run: ls -a
 
-      - name: download artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: test
+#      - name: download artifact
+#        uses: actions/download-artifact@v3
+#        with:
+#          name: test
 
-#      - name: create test.txt
-#        run: echo "test" >> test.txt
+      - name: create test.txt
+        run: echo "test" >> test.txt
 
 #      - name: Checkout
 #        uses: actions/checkout@v3
 
-#      - name: ls a 2
-#        run: ls -a
+      - name: ls a 2
+        run: ls -a
 #
 #      - name: pwd
 #        run: |
@@ -57,11 +57,26 @@ jobs:
 #      with:
 #        arguments: build
 
-#      - name: Upload artifact
-#        uses: actions/upload-artifact@v3
-#        with:
-#            name: test
-#            path: test.txt
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: test
+          path: test.txt
+
+      - name: Remove text.txt
+        run: rm test.txt
+
+      - name: ls a 3
+        run: ls -a
+
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: test
+          path: test.txt
+
+      - name: ls a 4
+        run: ls -a
 #
 #  deploy:
 #    needs: build
