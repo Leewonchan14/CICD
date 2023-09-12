@@ -69,6 +69,5 @@ jobs:
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/ci:${{ github.sha }}
             sudo docker stop ci || true
             sudo docker rm ci || true
-            sudo docker rmi ${{ secrets.DOCKER_USERNAME }}/ci:latest || true
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/ci:${{ github.sha }}
             sudo docker run -d --name ci -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/ci:${{ github.sha }}
