@@ -6,7 +6,7 @@ WORKDIR /app
 
 EXPOSE 8080
 
-COPY build/libs .
+COPY *.jar .
 # run ./gradlew bootRun
 
 #RUN java -jar CICD-0.0.1-SNAPSHOT.jar
