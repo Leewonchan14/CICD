@@ -24,22 +24,22 @@ jobs:
 #          - 3306:3306
 
     steps:
-      - name: ls a
-        run: ls -a
+#      - name: ls a
+#        run: ls -a
 
 #      - name: download artifact
 #        uses: actions/download-artifact@v3
 #        with:
 #          name: test
 
-      - name: create test.txt
-        run: echo "test" >> test.txt
+#      - name: create test.txt
+#        run: echo "test" >> test.txt
 
 #      - name: Checkout
 #        uses: actions/checkout@v3
 
-      - name: ls a 2
-        run: ls -a
+#      - name: ls a 2
+#        run: ls -a
 #
 #      - name: pwd
 #        run: |
@@ -57,29 +57,29 @@ jobs:
 #      with:
 #        arguments: build
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: test
-          path: test.txt
-
-      - name: Remove text.txt
-        run: rm test.txt
+#      - name: Upload artifact
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: test
+#          path: test.txt
+#
+#      - name: Remove text.txt
+#        run: rm test.txt
 
 #      - name: Create Directory test
 #        run: mkdir test
 
-      - name: ls a 3
-        run: ls -a
+#      - name: ls a 3
+#        run: ls -a
+#
+#      - name: Download artifact
+#        uses: actions/download-artifact@v3
+#        with:
+#          name: test
+#          path: ./test/test.txt
 
-      - name: Download artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: test
-          path: ./test/test.txt
-
-      - name: ls a 4
-        run: ls -a
+#      - name: ls a 4
+#        run: ls -a
 #
 #  deploy:
 #    needs: build
@@ -91,12 +91,11 @@ jobs:
 #        name: cicdsample
 #        path: build/libs
 #
-#    - name: Deploy
-#      uses: appleboy/ssh-action@master
-#      with:
-#        host: ${{ secrets.SERVER_IP }}
-#        username: ubuntu
-#        key: ${{ secrets.SSH_PRIVATE_KEY }}
-#        script: |
-#          cd CICD
-#          ls
+    - name: Deploy
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SERVER_IP }}
+        username: ubuntu
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          echo "hello world" >> test.txt
