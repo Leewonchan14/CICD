@@ -43,12 +43,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Deploy
-      uses: appleboy/ssh-action@master
-      with:
+      env: # 환경변수
         host: ${{ secrets.SERVER_IP }}
         username: ubuntu
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        port: 22
+        key: ${{ secrets.SSH_PRIVATE_KEY }} # github에 등록한 환경변수
+
+      uses: appleboy/ssh-action@master
+      with:
+        host: env.host
+        username: env.username
+        key: env.key
         script: |
-          cd /home/ubuntu/CICD
+          cd CICD
           ls
